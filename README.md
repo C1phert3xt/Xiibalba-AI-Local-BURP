@@ -38,6 +38,10 @@ chmod 600 .env
 python3 run.py
 ```
 
+**¿Primera vez? Prueba de concepto de extremo a extremo:** sigue
+[docs/POC_RUNBOOK.md](docs/POC_RUNBOOK.md) y valida los controles con
+`scripts/poc_smoke_test.sh`.
+
 Controles implementados:
 1. Autenticación Bearer (hashes SHA-256, comparación en tiempo constante) — `security.py`
 2. Binding seguro + guard anti-SSRF (loopback / RFC1918 / Tailscale CGNAT; bloquea metadatos de nube 169.254.169.254) — `gateway.py`, `run.py`

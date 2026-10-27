@@ -1,6 +1,14 @@
-fastapi==0.115.5
-uvicorn[standard]==0.32.1
-httpx==0.28.1
-pydantic==2.10.3
-pydantic-settings==2.7.0
-slowapi==0.1.9
+# Pisos mínimos (no pins exactos): así pip toma wheels precompiladas para tu
+# versión de Python, incluido Python 3.14 de Kali rolling. Fijar versiones viejas
+# fuerza a compilar pydantic-core desde Rust y falla contra el techo de PyO3.
+#
+# Para reproducibilidad: cuando instale limpio en tu entorno, congela el lockfile
+#   pip freeze > requirements.lock.txt
+# y usa ese archivo en despliegues idénticos.
+
+fastapi>=0.115.5
+uvicorn[standard]>=0.32.1
+httpx>=0.28.1
+pydantic>=2.11
+pydantic-settings>=2.7.0
+slowapi>=0.1.10
