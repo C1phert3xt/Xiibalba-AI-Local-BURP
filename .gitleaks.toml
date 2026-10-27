@@ -1,0 +1,35 @@
+# Configuración de gitleaks para Xibalba AI.
+# Hereda las reglas por defecto y añade un allowlist acotado y auditable para
+# falsos positivos conocidos. NO relaja la detección de secretos reales: solo
+# exime strings-placeholder específicos y la URL de sesión de atribución.
+
+title = "Xibalba AI — gitleaks"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = """
+Falsos positivos documentados (no son credenciales reales):
+- Placeholders de la plantilla .env.example y de la documentación.
+- URL de sesión de atribución de Claude Code (identificador, no credencial).
+Cualquier secreto real fuera de esta lista SÍ se sigue detectando.
+"""
+
+# Strings-placeholder exactos usados en docs y plantillas.
+regexes = [
+  '''clave-burp-rotable-aqui''',
+  '''clave-cli-secundaria''',
+  '''clave-falsa-xyz''',
+  '''la-misma-clave-del-gateway''',
+  '''la-misma-clave-que-pusiste-en-el-gateway''',
+  '''la-clave-que-pusiste-en-\.env''',
+  '''TU_CLAVE''',
+  '''session_01Aoz1d74hT1EoVVx2FiLVjL''',
+]
+
+# .env.example es una PLANTILLA: por convención solo contiene placeholders.
+# El .env real está en .gitignore y nunca se versiona.
+paths = [
+  '''xibalba-gateway/\.env\.example''',
+]
