@@ -20,6 +20,11 @@ Dos componentes:
 - `xibalba-gateway/` — Wrapper FastAPI compatible con OpenAI frente a Ollama/vLLM.
 - `xibalba-burp/` — Extensión Burp Suite Pro (Montoya API) que analiza tráfico con el modelo local.
 
+> **Entorno WSL2 Kali en Windows 11** (Ollama con `qwen2.5-coder:latest`): la
+> topología de red host↔WSL2 se explica en [docs/WSL2_SETUP.md](docs/WSL2_SETUP.md).
+> El gateway corre dentro de WSL2 junto a Ollama; Burp lo alcanza vía modo de red
+> *mirrored*.
+
 ## 1. Gateway (FastAPI)
 
 ```bash

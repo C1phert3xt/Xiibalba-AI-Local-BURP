@@ -11,7 +11,7 @@ import java.time.Duration;
 
 public class LocalAiClient {
     private static final String ENDPOINT = "http://127.0.0.1:8000/v1/chat/completions";
-    private static final String MODEL = "qwen2.5-coder:32b";   // ajusta al que sirvas
+    private static final String MODEL = "qwen2.5-coder:latest";   // debe estar en ALLOWED_MODELS del gateway
 
     // Instruccion que fuerza salida JSON estructurada. El par request/response del
     // objetivo va DELIMITADO y etiquetado como datos no confiables (ver nota de seguridad).
