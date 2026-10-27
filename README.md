@@ -2,6 +2,19 @@
 
 ![Xibalba AI key-art](docs/assets/xibalba-keyart.png)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![Java](https://img.shields.io/badge/Java-21-orange.svg)
+
+Análisis de seguridad web asistido por inteligencia artificial **100% local**,
+sin fugas a la nube. Un gateway FastAPI compatible con OpenAI frente a tus
+modelos locales (Ollama / vLLM) y una extensión de Burp Suite que envía el
+tráfico interceptado a ese modelo para análisis de vulnerabilidades.
+
+> **Uso autorizado únicamente.** Herramienta de seguridad ofensiva para pruebas
+> bajo autorización explícita y laboratorios propios. Lee el
+> [DISCLAIMER](DISCLAIMER.md) antes de usarla.
+
 Dos componentes:
 
 - `xibalba-gateway/` — Wrapper FastAPI compatible con OpenAI frente a Ollama/vLLM.
@@ -60,3 +73,8 @@ El `response` del objetivo es contenido no confiable que se envía al modelo (ri
 inyección de prompt indirecta). Mitigaciones: delimitadores `<<<TRAFICO>>>`, declaración
 de "datos no instrucciones" en el system prompt, `temperature 0.1`, escape HTML de la
 salida del modelo, y validación manual del analista — nunca acción automática sobre un hallazgo.
+
+## Licencia
+
+Distribuido bajo licencia [MIT](LICENSE). Consulta también el
+[DISCLAIMER](DISCLAIMER.md) y la [política de seguridad](SECURITY.md).

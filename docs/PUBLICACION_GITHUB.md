@@ -71,19 +71,33 @@ Claude-Session: https://claude.ai/code/session_01Aoz1d74hT1EoVVx2FiLVjL"
 
 ---
 
-## 4. Crear el repositorio remoto y subir
+## 4. Autenticarse en GitHub (una sola vez)
 
-### Opción A — GitHub CLI (un solo comando, recomendado)
+Si `gh` responde `HTTP 401: Bad credentials`, falta autenticación:
 
 ```bash
-# Privado (recomendado para herramienta ofensiva):
-gh repo create xibalba-ai --private --source=. --remote=origin --push
-
-# Si lo quieres público:
-# gh repo create xibalba-ai --public --source=. --remote=origin --push
+gh auth login
+# GitHub.com -> HTTPS -> Yes (autenticar git) -> Login with a web browser
+gh auth status      # debe decir: Logged in to github.com as <usuario>
 ```
 
-### Opción B — Manual (si creaste el repo en la web de GitHub)
+## 5. Crear el repositorio remoto y subir (PÚBLICO)
+
+```bash
+gh repo create xibalba-ai --public --source=. --remote=origin --push \
+  --description "Ecosistema de IA ofensiva 100% local: gateway FastAPI compatible con OpenAI y extensión de Burp Suite (Montoya API) para análisis de tráfico con modelos locales."
+```
+
+Luego agrega los topics para que sea descubrible:
+
+```bash
+gh repo edit --add-topic offensive-security,pentesting,burp-suite,fastapi,local-llm,ollama,purple-team,appsec,montoya-api
+```
+
+> Repo PÚBLICO: el escaneo de secretos (paso 8) deja de ser opcional. Córrelo
+> ANTES del push — una vez publicado, un secreto filtrado ya fue indexado.
+
+### Alternativa manual (si creaste el repo en la web de GitHub)
 
 ```bash
 # Crea el repo vacío en github.com (sin README, sin .gitignore, sin licencia)
@@ -98,7 +112,22 @@ git push -u origin main
 
 ---
 
-## 5. Flujo de trabajo para cambios posteriores
+## 6. Licencia y avisos legales
+
+El repo ya incluye, en la raíz:
+
+- `LICENSE` — MIT. GitHub la detecta sola y muestra la etiqueta de licencia.
+- `DISCLAIMER.md` — uso autorizado únicamente; deslinde de responsabilidad y
+  nota de marca sobre Burp Suite® (PortSwigger).
+- `SECURITY.md` — cómo reportar vulnerabilidades del propio software (GitHub lo
+  enlaza desde la pestaña *Security*).
+
+Si prefieres Apache 2.0 en vez de MIT, reemplaza `LICENSE` y actualiza la
+insignia del `README.md`.
+
+---
+
+## 7. Flujo de trabajo para cambios posteriores
 
 Cada mejora (p. ej. el modo `HttpHandler` pasivo o el enrutamiento multi-modelo)
 va en su propia rama, con Pull Request:
@@ -119,7 +148,7 @@ gh pr create --fill
 
 ---
 
-## 6. Red de seguridad: escaneo de secretos
+## 8. Red de seguridad: escaneo de secretos
 
 Antes de hacer público cualquier repo de seguridad, pasa un detector de secretos:
 
@@ -133,7 +162,7 @@ hay que reescribir el historial (`git filter-repo`) y **rotar la clave expuesta*
 
 ---
 
-## 7. (Opcional) Protección de rama y plantilla de PR
+## 9. (Opcional) Protección de rama y plantilla de PR
 
 ```bash
 # Requiere revisión antes de merge a main (si trabajas con tu equipo)
@@ -147,7 +176,7 @@ Plantilla de PR en `.github/pull_request_template.md` (ver archivo adjunto en el
 
 ---
 
-## 8. Imagen de marca (key-art)
+## 10. Imagen de marca (key-art)
 
 El banner oficial vive en el repo en:
 
