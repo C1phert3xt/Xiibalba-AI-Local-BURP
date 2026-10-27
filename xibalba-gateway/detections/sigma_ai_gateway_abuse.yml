@@ -1,0 +1,26 @@
+title: Abuso o fuerza bruta contra el Gateway de IA local (Xibalba)
+id: 8f2c1d90-ia-gw-0001
+status: experimental
+description: Volumen anomalo de fallos de autenticacion o rechazos contra el wrapper de modelos locales
+logsource:
+    product: xibalba-ai-gateway
+    service: application
+detection:
+    selection_fail:
+        source: 'xibalba-ai-gateway'
+        event:
+            - 'auth_failure'
+            - 'rate_limited'
+            - 'model_denied'
+    timeframe: 5m
+    condition: selection_fail | count() by key > 15
+fields:
+    - key
+    - event
+    - model
+level: high
+falsepositives:
+    - Cliente propio mal configurado tras rotacion de clave
+tags:
+    - attack.credential_access
+    - attack.t1110      # Brute Force
